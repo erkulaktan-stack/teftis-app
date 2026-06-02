@@ -19,11 +19,6 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.19.x'
-
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -34,14 +29,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install flet openpyxl
 
-      - name: Configure Flutter and Pre-download Artifacts
-        run: |
-          flutter doctor
-          flutter config --no-analytics
-
       - name: Build APK Via Flet CLI
         run: |
-          flet build apk
+          flet build apk --yes
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
